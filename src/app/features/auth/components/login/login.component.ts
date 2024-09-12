@@ -21,10 +21,13 @@ export class LoginComponent {
   login() {
     this.isSubmitting = true;
     this.authService.login(this.userLogin).subscribe({
-      next: (response) => {
+      next: (response: any) => {
+        console.log({...response})
         this.isSubmitting = false;
         this.submissionSuccess = 'Login successful!';
         this.submissionError = null;
+        // setting the token in local storage
+        localStorage.setItem('jwtToken', response.token);
       },
       error: (error) => {
         console.log(error)
