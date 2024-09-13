@@ -27,7 +27,7 @@ export class LoginComponent {
         this.submissionSuccess = 'Login successful!';
         this.submissionError = null;
         // setting the token in local storage
-        localStorage.setItem('jwtToken', response.token);
+        // localStorage.setItem('jwtToken', response.token);
       },
       error: (error) => {
         console.log(error)

@@ -4,6 +4,8 @@ import { Product } from '../../models/products.model';
 import { ProductsService } from '../../services/products.service';
 import { Observable, Subscription } from 'rxjs';
 import { ProductsModule } from '../../shared/products.module';
+import { CartService } from '../../../cart/services/cart.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-product-detail',
@@ -16,7 +18,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   productId?: string;
   product$: Observable<Product> | undefined;
   subscription: Subscription | undefined;
-  constructor(private route: ActivatedRoute, private productsService: ProductsService) {}
+  constructor(private route: ActivatedRoute, private productsService: ProductsService, private cartService: CartService) {}
 
   ngOnInit(): void {
     this.subscription = this.route.params.subscribe(params => {
@@ -31,5 +33,11 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
+  }
+
+  addToCart(productId: string, quantity: number) {
+    this.cartService.addItemToCart(productId, quantity).subscribe((response) => {
+      console.log(response);
+    });
   }
 }

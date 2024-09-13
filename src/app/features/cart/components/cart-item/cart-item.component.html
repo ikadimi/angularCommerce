@@ -1,1 +1,17 @@
-<p>cart-item works!</p>
+<li>
+    {{ cartItem | json }}
+    <div>
+        <span>{{ cartItem.name }}</span>
+        <span>\${{ cartItem.price }}</span>
+    </div>
+    <div *ngIf="availableQuantities.length > 1">
+        <label>Quantity:</label>
+        <select
+            [ngModel]="quantity"
+            (ngModelChange)="onQuantityChange(cartItem._id, $event)"
+        >
+            <option *ngFor="let qty of availableQuantities" [value]="qty">{{ qty }}</option>
+        </select>
+    </div>
+    <button (click)="removeFromCart(cartItem._id)">Remove</button>
+</li>

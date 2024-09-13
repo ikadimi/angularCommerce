@@ -11,3 +11,7 @@ export interface Product {
     stock: number;
     features: string[];
   }
+
+export interface ProductWithQuantity extends Product {
+    quantity: number;
+}
