@@ -13,8 +13,6 @@ export const routes: Routes = [
     {path: 'products/:id', component: ProductDetailComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'cart', component: CartComponent, resolve: {
-        cartItems: CartResolver // Resolve cart data before the route is activated
-    }},
+    {path: 'cart', component: CartComponent},
     {path: '**', redirectTo: ''}
 ];

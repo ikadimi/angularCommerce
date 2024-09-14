@@ -2,6 +2,7 @@
 <ul>
     <li *ngFor="let product of products">
         <a [routerLink]="['/products', product._id]">
+            <img [src]="imageSrc(product.image)" alt="product image">
             {{product.name}}
         </a>
     </li>

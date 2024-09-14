@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../../features/auth/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -10,4 +11,11 @@ import { RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
 
+  constructor(private authService: AuthService, private router: Router) { }
+
+  logout() {
+    this.authService.logout().subscribe(() => {
+      this.router.navigate(['/login']);
+    });
+  }
 }
