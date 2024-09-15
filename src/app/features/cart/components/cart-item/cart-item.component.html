@@ -1,17 +1,21 @@
-<li>
-    {{ cartItem | json }}
-    <div>
-        <span>{{ cartItem.name }}</span>
-        <span>\${{ cartItem.price }}</span>
+<li class="cart-item-container">
+    <div class="cart-item-info">
+      <span class="item-name">{{ cartItem.name }}</span>
+      <span class="item-price">${{ cartItem.price.toFixed(2) }}</span>
     </div>
-    <div *ngIf="availableQuantities.length > 1">
-        <label>Quantity:</label>
-        <select
-            [ngModel]="quantity"
-            (ngModelChange)="onQuantityChange(cartItem._id, $event)"
-        >
-            <option *ngFor="let qty of availableQuantities" [value]="qty">{{ qty }}</option>
-        </select>
+    
+    <div class="cart-item-quantity" *ngIf="availableQuantities.length > 1">
+      <label for="quantity-select-{{cartItem._id}}" class="visually-hidden">Quantity:</label>
+      <select
+        id="quantity-select-{{cartItem._id}}"
+        [ngModel]="quantity"
+        (ngModelChange)="onQuantityChange(cartItem._id, $event)"
+        class="quantity-select"
+      >
+        <option *ngFor="let qty of availableQuantities" [value]="qty">{{ qty }}</option>
+      </select>
     </div>
-    <button (click)="removeFromCart(cartItem._id)">Remove</button>
-</li>
+    
+    <button (click)="removeFromCart(cartItem._id)" class="btn-remove">Remove</button>
+  </li>
+  

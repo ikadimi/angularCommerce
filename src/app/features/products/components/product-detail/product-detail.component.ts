@@ -27,6 +27,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  imageSrc(filename: string) {
+    return this.productsService.imageSrc(filename);
+}
+
   fetchProduct(productId: string) {
     this.product$ = this.productsService.getProduct(productId);
   }

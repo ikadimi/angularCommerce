@@ -1,1 +1,7 @@
-<p>products works!</p>
+<div>
+    <h1>Products</h1>
+    <product-search 
+        (filtersChange)="onFiltersChanged($event)"
+    ></product-search>
+    <product-list [products]="products"></product-list>
+</div>

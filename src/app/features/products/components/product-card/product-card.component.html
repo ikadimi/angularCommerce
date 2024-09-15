@@ -1,0 +1,23 @@
+<ng-container *ngIf="product">
+    <!-- [aria-label]="View details of {{ product.name }}" -->
+    <a class="product-card" [routerLink]="['/products', product._id]" >
+        <img [src]="imageSrc(product.image)" alt="{{ product.name }} image" class="product-image" />
+
+        <div class="product-details">
+            <h2 class="product-name">{{ product.name }}</h2>
+            <p class="product-description">{{ product.description }}</p>
+
+            <div class="product-info">
+                <span class="product-price">\${{ product.price.toFixed(2) }}</span>
+                <span class="product-brand">{{ product.brand }}</span>
+                <span class="product-category">{{ product.category }}</span>
+                <span class="product-rating">Rating: {{ product.rating }} ({{ product.reviews }} reviews)</span>
+                <span class="product-stock">In Stock: {{ product.stock }}</span>
+            </div>
+
+            <ul class="product-features">
+                <li *ngFor="let feature of product.features">{{ feature }}</li>
+            </ul>
+        </div>
+    </a>
+</ng-container>

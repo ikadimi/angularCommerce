@@ -1,17 +1,88 @@
-select {
-    padding: 5px;
-    margin-left: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
+.cart-item-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background-color: #2b2b2b; // Dark background to match the theme
+  color: #f5f5f5; // Light text color
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px; // Space between items
+  list-style-type: none; // Remove default list item styling
+
+  .cart-item-info {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .item-name {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .item-price {
+      font-size: 1.25rem;
+      color: #e94560; // Highlight price
+    }
+  }
+
+  .cart-item-quantity {
+    margin-right: 20px;
+
+    .quantity-select {
+      background-color: #444;
+      color: #f5f5f5;
+      border: 1px solid #666;
+      border-radius: 4px;
+      padding: 10px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease;
+
+      &:focus {
+        outline: none;
+        border-color: #e94560; // Highlight border on focus
+      }
+    }
+
+    label {
+      display: none; // Hide label for better visual appearance, but keep it for accessibility
+    }
+  }
+
+  .btn-remove {
+    background-color: #e94560;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
     font-size: 14px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+    align-self: center;
+
+    &:hover {
+      background-color: #d03350;
+      transform: scale(1.05);
+    }
   }
-  
-  select:focus {
-    border-color: #007bff;
-    outline: none;
+
+  // Responsive Styles
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .cart-item-info {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .cart-item-quantity {
+      width: 100%;
+      margin-bottom: 10px;
+    }
   }
-  
-  label {
-    font-weight: bold;
-  }
+}

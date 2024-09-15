@@ -15,3 +15,10 @@ export interface Product {
 export interface ProductWithQuantity extends Product {
     quantity: number;
 }
+
+export interface SearchQuery {
+    searchTerm?: string;
+    category?: string;
+    minPrice?: number;
+    maxPrice?: number;
+}

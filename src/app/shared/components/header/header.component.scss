@@ -1,8 +1,66 @@
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-    padding: 0;
-    margin: 0;
-    align-items: center;
-}
+header {
+    background-color: #0a0a12;
+    padding: 5px 20px; // Reduced padding to make the header less boxy
+    box-shadow: none; // Removed box-shadow for a more open feel
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 25px; // Increase spacing between the links for more breathing room
+  
+      li {
+        .nav-link {
+          color: #f0f0f0;
+          font-size: 18px; // Increased font size for larger links
+          font-weight: 600;
+          padding: 12px 20px; // More padding for a larger clickable area
+          text-decoration: none;
+          border-radius: 3px; // Slight roundness to the corners
+          transition: background-color 0.2s ease, color 0.2s ease;
+  
+          &:hover {
+            background-color: #e94560;
+            color: #ffffff;
+            box-shadow: none; // Removed shadow on hover for a cleaner look
+          }
+  
+          &.active {
+            background-color: #e94560;
+            color: #ffffff;
+          }
+        }
+  
+        .logout:hover {
+          background-color: #ff4b5c;
+          color: #ffffff;
+        }
+      }
+    }
+  
+    // Mobile responsiveness
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        gap: 15px; // Increased gap for a more spacious mobile layout
+  
+        li {
+          .nav-link {
+            width: 100%;
+            text-align: left;
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
+  

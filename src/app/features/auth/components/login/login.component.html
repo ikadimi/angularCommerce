@@ -1,10 +1,17 @@
-<p>login works!</p>
-<form (ngSubmit)="login()">
-    <label for="email">email</label>
-    <input type="email" name="email" id="email" [(ngModel)]="userLogin.email">
-    <label for="password">password</label>
-    <input type="password" name="password" id="password" [(ngModel)]="userLogin.password">
-    <button type="submit">login</button>
-    <div *ngIf="submissionSuccess" class="success">{{ submissionSuccess }}</div>
-    <div *ngIf="submissionError" class="error">{{ submissionError }}</div>
-</form>
+<form class="login-form" (ngSubmit)="login()">
+    <div class="form-group">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" name="email" id="email" [(ngModel)]="userLogin.email" class="form-input" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" name="password" id="password" [(ngModel)]="userLogin.password" class="form-input" required>
+    </div>
+  
+    <button type="submit" class="btn-submit">Login</button>
+  
+    <div *ngIf="submissionSuccess" class="feedback success">{{ submissionSuccess }}</div>
+    <div *ngIf="submissionError" class="feedback error">{{ submissionError }}</div>
+  </form>
+  

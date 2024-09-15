@@ -1,0 +1,16 @@
+:root {
+  --header-height: 60px; // Adjust this value to match your header height
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column; // Stack children vertically (adjust if needed)
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; // Adjust for header height
+  max-width: 1200px; // Maximum width of the container
+  margin: 0 auto; // Center the container horizontally
+  padding: 0 20px; // Add horizontal padding for gaps on the sides
+  box-sizing: border-box; // Ensure padding is included in the width
+  background-color: #2b2b2b; // Optional: dark background to match the theme
+}

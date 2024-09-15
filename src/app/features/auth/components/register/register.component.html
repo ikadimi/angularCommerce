@@ -1,18 +1,21 @@
-<p>register works!</p>
-<form (ngSubmit)="register()" #registrationForm="ngForm">
-    <div>
-        <label for="username">Username:</label>
-        <input type="username" id="username" name="username" [(ngModel)]="userRegistration.username" required>
-    </div>
-    <div>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" [(ngModel)]="userRegistration.email" required>
-    </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" [(ngModel)]="userRegistration.password" required>
-    </div>
-    <button type="submit" [disabled]="isSubmitting">Register</button>
-    <div *ngIf="submissionSuccess" class="success">{{ submissionSuccess }}</div>
-    <div *ngIf="submissionError" class="error">{{ submissionError }}</div>
-  </form>
+<form class="registration-form" (ngSubmit)="register()" #registrationForm="ngForm">
+  <div class="form-group">
+    <label for="username" class="form-label">Username:</label>
+    <input type="text" id="username" name="username" [(ngModel)]="userRegistration.username" class="form-input" required>
+  </div>
+
+  <div class="form-group">
+    <label for="email" class="form-label">Email:</label>
+    <input type="email" id="email" name="email" [(ngModel)]="userRegistration.email" class="form-input" required>
+  </div>
+
+  <div class="form-group">
+    <label for="password" class="form-label">Password:</label>
+    <input type="password" id="password" name="password" [(ngModel)]="userRegistration.password" class="form-input" required>
+  </div>
+
+  <button type="submit" class="btn-submit" [disabled]="isSubmitting">Register</button>
+
+  <div *ngIf="submissionSuccess" class="feedback success">{{ submissionSuccess }}</div>
+  <div *ngIf="submissionError" class="feedback error">{{ submissionError }}</div>
+</form>

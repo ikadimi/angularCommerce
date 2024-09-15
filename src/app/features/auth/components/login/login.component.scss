@@ -1,0 +1,89 @@
+.login-form {
+    background-color: #333; // Dark background to match the theme
+    color: #f5f5f5; // Light text color
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+  
+    .form-label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+  
+    .form-input {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #666;
+      border-radius: 4px;
+      background-color: #444;
+      color: #f5f5f5;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease;
+  
+      &:focus {
+        outline: none;
+        border-color: #e94560; // Highlight border on focus
+      }
+    }
+  
+    .btn-submit {
+      background-color: #e94560;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s;
+  
+      &:hover {
+        background-color: #d03350;
+        transform: scale(1.05);
+      }
+    }
+  
+    .feedback {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 0.875rem;
+  
+      &.success {
+        background-color: #4caf50;
+        color: #fff;
+      }
+  
+      &.error {
+        background-color: #f44336;
+        color: #fff;
+      }
+    }
+  
+    // Responsive Styles
+    @media (max-width: 600px) {
+      padding: 15px;
+  
+      .form-label,
+      .form-input {
+        font-size: 0.875rem;
+      }
+  
+      .btn-submit {
+        width: 100%;
+        font-size: 14px;
+      }
+    }
+  }
+  

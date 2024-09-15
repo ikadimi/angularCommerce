@@ -1,0 +1,101 @@
+.product-details-container {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #2b2b2b; // Dark background to match the theme
+    color: #f5f5f5; // Light text color for better contrast
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    box-sizing: border-box;
+    
+    .product-image {
+      flex: 1;
+      max-width: 500px; // Max width for large images
+      margin-right: 20px;
+  
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        background-color: #444; // Fallback color for missing images
+      }
+    }
+  
+    .product-info {
+      flex: 2;
+      
+      .product-name {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+  
+      .product-description {
+        font-size: 1rem;
+        margin-bottom: 20px;
+        color: #b0b0b0; // Lighter description text
+      }
+  
+      .product-meta {
+        font-size: 1rem;
+        margin-bottom: 20px;
+  
+        span {
+          display: block;
+          margin-bottom: 10px;
+          
+          &.product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e94560; // Highlight price
+          }
+  
+          &.product-brand, &.product-category, &.product-rating, &.product-stock {
+            color: #dddddd; // Light text for meta information
+          }
+        }
+      }
+  
+      .product-features {
+        list-style-type: disc;
+        padding-left: 20px;
+        margin-bottom: 20px;
+        font-size: 1rem;
+        color: #bbbbbb; // Light gray for features
+  
+        li {
+          margin-bottom: 5px;
+        }
+      }
+  
+      .btn-add-to-cart {
+        background-color: #e94560;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s;
+  
+        &:hover {
+          background-color: #d03350;
+          transform: scale(1.05);
+        }
+      }
+    }
+  
+    // Responsive Styles
+    @media (max-width: 900px) {
+      flex-direction: column;
+      align-items: center;
+  
+      .product-image {
+        max-width: 100%;
+        margin-right: 0;
+      }
+    }
+  }
+  

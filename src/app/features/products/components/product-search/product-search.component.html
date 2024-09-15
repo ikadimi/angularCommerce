@@ -1,1 +1,15 @@
-<p>product-search works!</p>
+<div class="filter-container">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search" (ngModelChange)="onFilterChange()" class="input-field" />
+    
+    <select [(ngModel)]="category" (change)="onFilterChange()" class="select-field">
+      <option value="">All Categories</option>
+      <option value="electronics">Electronics</option>
+      <option value="books">Books</option>
+      <!-- Add more categories -->
+    </select>
+    
+    <input type="number" [(ngModel)]="minPrice" (ngModelChange)="onFilterChange()" placeholder="Min Price" class="input-field" />
+    <input type="number" [(ngModel)]="maxPrice" (ngModelChange)="onFilterChange()" placeholder="Max Price" class="input-field" />
+  
+    <button (click)="clearFilters()" class="btn-clear">Clear Filters</button>
+</div>  
