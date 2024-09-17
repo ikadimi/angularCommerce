@@ -54,23 +54,6 @@
       }
     }
   
-    .feedback {
-      margin-top: 10px;
-      padding: 10px;
-      border-radius: 4px;
-      font-size: 0.875rem;
-  
-      &.success {
-        background-color: #4caf50;
-        color: #fff;
-      }
-  
-      &.error {
-        background-color: #f44336;
-        color: #fff;
-      }
-    }
-  
     // Responsive Styles
     @media (max-width: 600px) {
       padding: 15px;

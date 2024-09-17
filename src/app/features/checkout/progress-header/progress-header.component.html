@@ -1,0 +1,21 @@
+<div class="progress-header">
+    <div 
+      class="step" 
+      [class.active]="currentStep === 1" 
+      (click)="goToStep(1)">
+      <span>1. Delivery Address</span>
+    </div>
+    <div 
+      class="step" 
+      [class.active]="currentStep === 2" 
+      (click)="goToStep(2)">
+      <span>2. Payment</span>
+    </div>
+    <div 
+      class="step" 
+      [class.active]="currentStep === 3" 
+      (click)="goToStep(3)">
+      <span>3. Confirmation</span>
+    </div>
+</div>
+  

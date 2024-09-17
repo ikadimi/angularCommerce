@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { ProductsModule } from '../../shared/products.module';
 import { CartService } from '../../../cart/services/cart.service';
 import { response } from 'express';
+import { NotificationService } from '../../../../shared/components/notification/services/notification.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -18,7 +19,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   productId?: string;
   product$: Observable<Product> | undefined;
   subscription: Subscription | undefined;
-  constructor(private route: ActivatedRoute, private productsService: ProductsService, private cartService: CartService) {}
+  constructor(private route: ActivatedRoute,
+    private productsService: ProductsService,
+    private cartService: CartService,
+    private notificationService: NotificationService) {}
 
   ngOnInit(): void {
     this.subscription = this.route.params.subscribe(params => {
@@ -41,6 +45,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   addToCart(productId: string, quantity: number) {
     this.cartService.addItemToCart(productId, quantity).subscribe((response) => {
+      this.notificationService.showSuccess('Item added to cart');
       console.log(response);
     });
   }

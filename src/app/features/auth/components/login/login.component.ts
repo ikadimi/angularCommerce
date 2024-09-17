@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { AuthModule } from '../../shared/auth.module';
 import { LoginForm } from '../models/auth.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,28 +13,19 @@ import { LoginForm } from '../models/auth.model';
 })
 export class LoginComponent {
   userLogin: LoginForm = { email: '', password: '' };
-  submissionSuccess: string | null = null;
-  submissionError: string | null = null;
   isSubmitting = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   login() {
     this.isSubmitting = true;
     this.authService.login(this.userLogin).subscribe({
-      next: (response: any) => {
-        console.log({...response})
+      next: () => {
         this.isSubmitting = false;
-        this.submissionSuccess = 'Login successful!';
-        this.submissionError = null;
-        // setting the token in local storage
-        // localStorage.setItem('jwtToken', response.token);
+        this.router.navigate(['/']);
       },
-      error: (error) => {
-        console.log(error)
+      error: () => {
         this.isSubmitting = false;
-        this.submissionError = error.error.message;
-        this.submissionSuccess = null;
       }
     });
   }

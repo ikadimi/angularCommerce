@@ -1,0 +1,23 @@
+<div class="checkout-step">
+    <h2>Payment Information</h2>
+    <form [formGroup]="paymentForm" (ngSubmit)="onNext()">
+      <div class="form-group">
+        <label for="name">Card Name</label>
+        <input id="name" formControlName="name" type="text" placeholder="Enter your Card Name">
+      </div>
+      <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <input id="cardNumber" formControlName="cardNumber" type="text" placeholder="Enter your card number">
+      </div>
+      <div class="form-group">
+        <label for="expiryDate">Expiry Date</label>
+        <input id="expiryDate" formControlName="expiryDate" type="text" placeholder="MM/YY">
+      </div>
+      <div class="form-group">
+        <label for="cvv">CVV</label>
+        <input id="cvv" formControlName="cvv" type="text" placeholder="Enter CVV">
+      </div>
+      <button type="submit" [disabled]="paymentForm.invalid">Next</button>
+    </form>
+  </div>
+  

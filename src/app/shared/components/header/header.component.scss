@@ -27,7 +27,8 @@ header {
           text-decoration: none;
           border-radius: 3px; // Slight roundness to the corners
           transition: background-color 0.2s ease, color 0.2s ease;
-  
+          cursor: pointer;
+
           &:hover {
             background-color: #e94560;
             color: #ffffff;

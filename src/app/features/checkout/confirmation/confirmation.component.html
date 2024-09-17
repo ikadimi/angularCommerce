@@ -1,0 +1,12 @@
+<div class="checkout-step">
+    <h2>Order Confirmation</h2>
+    <p>Your order has been successfully placed! Below are the details of your order:</p>
+    <div class="order-summary">
+      <!-- Display order summary details here -->
+      <p><strong>Order ID:</strong> {{order.id}}</p>
+      <p><strong>Shipping Address:</strong> {{order.shippingAddress}}</p>
+      <p><strong>Total Amount:</strong> {{order.totalAmount}}</p>
+    </div>
+    <button (click)="onFinish()">Finish</button>
+  </div>
+  

@@ -1,0 +1,74 @@
+.checkout-step {
+  margin-bottom: 50px;
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #e94560; // Primary color for step title
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; // Space between form groups
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      label {
+        font-size: 16px;
+        color: #fff; // White text
+      }
+
+      input {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #555;
+        background-color: #333; // Dark input background
+        color: #fff; // White input text
+        transition: border-color 0.3s;
+
+        &::placeholder {
+          color: #aaa; // Lighter placeholder text
+        }
+
+        &:focus {
+          outline: none;
+          border-color: #e94560; // Primary color for focus
+          box-shadow: 0 0 5px rgba(233, 69, 96, 0.5); // Slight glow on focus
+        }
+      }
+    }
+
+    button {
+      padding: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      background-color: #e94560; // Primary button color
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+
+      &:hover {
+        background-color: darken(#e94560, 10%); // Darker on hover
+        transform: scale(1.05); // Slight zoom effect on hover
+      }
+
+      &:active {
+        background-color: darken(#e94560, 20%);
+        transform: scale(1); // Reset zoom on click
+      }
+
+      &:disabled {
+        background-color: #aaa; // Disabled state for invalid form
+        cursor: not-allowed;
+      }
+    }
+  }
+}

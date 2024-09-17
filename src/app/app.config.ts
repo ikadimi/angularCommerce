@@ -5,7 +5,6 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { WithCredentialsInterceptor } from './interceptors/with-credentials.interceptor';
-import { authInterceptor } from './interceptors/auth.interceptor';
 import { provideStore } from '@ngrx/store';
 
 export const appConfig: ApplicationConfig = {
@@ -13,7 +12,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(),
-    provideHttpClient(withFetch(), withInterceptors([WithCredentialsInterceptor, authInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([WithCredentialsInterceptor])),
     provideStore()
 ]
 };

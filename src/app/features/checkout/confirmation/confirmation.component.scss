@@ -1,0 +1,59 @@
+.checkout-step {
+  margin-bottom: 50px;
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #e94560; // Primary color for the step title
+    text-align: center;
+  }
+
+  p {
+    font-size: 18px;
+    color: #fff; // White text
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .order-summary {
+    background-color: #1f1f1f; // Dark background for summary box
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    text-align: left;
+    color: #fff; // White text inside the summary
+    font-size: 16px;
+
+    p {
+      margin: 10px 0;
+
+      strong {
+        color: #e94560; // Primary color for labels (e.g., Order ID, Shipping Address)
+      }
+    }
+  }
+
+  button {
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #e94560; // Primary button color
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    display: block;
+    margin: 0 auto;
+
+    &:hover {
+      background-color: darken(#e94560, 10%); // Darker on hover
+      transform: scale(1.05); // Slight zoom effect on hover
+    }
+
+    &:active {
+      background-color: darken(#e94560, 20%);
+      transform: scale(1); // Reset zoom on click
+    }
+  }
+}

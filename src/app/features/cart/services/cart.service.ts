@@ -6,6 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { Product, ProductWithQuantity } from '../../products/models/products.model';
 import { ProductsService } from '../../products/services/products.service';
 import { Cart } from '../models/cart.model';
+import { ApiWithNotificationService } from '../../../shared/services/api-with-notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class CartService {
   // Observable to expose the cart state
   public cart$ = this.cartSubject.asObservable();
 
-  constructor(private http: HttpClient, private productsService: ProductsService) {
+  constructor(private http: HttpClient, private ApiWithNotificationSercice: ApiWithNotificationService, private productsService: ProductsService) {
     this.initCart();
   }
 
@@ -51,26 +52,25 @@ export class CartService {
 
   // Add an item to the cart and update the subject
   addItemToCart(productId: string, quantity: number): Observable<any> {
-    return this.http.post(`${this.cartUrl}/add`, { productId, quantity }).pipe(
-      switchMap(() => this.getCartWithProductDetails()) // Refresh the cart after adding an item
+    return this.ApiWithNotificationSercice.callApi(`${this.cartUrl}/add`, 'POST', { productId, quantity }).pipe(
+      switchMap(() => this.getCartWithProductDetails())
     );
   }
 
   // Update the quantity of an item and refresh the cart
   updateCartItem(productId: string, quantity: number): Observable<any> {
-    return this.http.put(`${this.cartUrl}/update`, { productId, quantity }).pipe(
-      switchMap(() => this.getCartWithProductDetails()) // Refresh the cart after updating
+    return this.ApiWithNotificationSercice.callApi(`${this.cartUrl}/update`, 'PUT', { productId, quantity }).pipe(
+      switchMap(() => this.getCartWithProductDetails())
     );
   }
 
   // Remove an item from the cart and refresh the cart
   removeCartItem(productId: string): Observable<any> {
-    return this.http.delete(`${this.cartUrl}/remove?productId=${productId}`).pipe(
-      switchMap(() => this.getCartWithProductDetails()) // Refresh the cart after removal
-    );
+    return this.ApiWithNotificationSercice.callApi(`${this.cartUrl}/remove?productId=${productId}`, 'DELETE').pipe(
+      switchMap(() => this.getCartWithProductDetails())
+    )
   }
 
-  // Optional: If you want to provide a way to clear the cart locally (e.g., on logout)
   clearCart() {
     this.cartSubject.next([]); // Clear the cart
   }

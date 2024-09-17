@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../features/auth/services/auth.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -13,9 +13,12 @@ import { CommonModule } from '@angular/common';
 export class HeaderComponent implements OnInit{
   isAuthenticated = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isAuthenticated = !!localStorage.getItem('loggedIn');
+    }
     this.authService.user.subscribe(user => {
       this.isAuthenticated = !!user;
     });
