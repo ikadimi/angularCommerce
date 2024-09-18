@@ -6,6 +6,7 @@ import { CartListComponent } from './components/cart-list/cart-list.component';
 import { CommonModule } from '@angular/common';
 import { CartTotalComponent } from './components/cart-total/cart-total.component';
 import { RouterModule } from '@angular/router';
+import { CartWithProductDetails } from './models/cart.model';
 // import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -16,13 +17,13 @@ import { RouterModule } from '@angular/router';
   styleUrl: './cart.component.scss'
 })
 export class CartComponent{
-  cartItems: ProductWithQuantity[] = [];
+  cart: CartWithProductDetails | null = null;
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
     this.cartService.initCart().subscribe();
-    this.cartService.cart$.subscribe(cartItems => {
-      this.cartItems = cartItems;
+    this.cartService.cart$.subscribe(cart => {
+      this.cart = cart;
     });
   }
 }

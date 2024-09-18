@@ -1,12 +1,38 @@
-<div class="checkout-step">
-    <h2>Order Confirmation</h2>
-    <p>Your order has been successfully placed! Below are the details of your order:</p>
-    <div class="order-summary">
-      <!-- Display order summary details here -->
-      <p><strong>Order ID:</strong> {{order.id}}</p>
-      <p><strong>Shipping Address:</strong> {{order.shippingAddress}}</p>
-      <p><strong>Total Amount:</strong> {{order.totalAmount}}</p>
-    </div>
-    <button (click)="onFinish()">Finish</button>
-  </div>
+<div *ngIf="checkoutData" class="confirmation-page">
+  <h2 class="page-title">Order Confirmation</h2>
   
+  <div *ngIf="checkoutData.deliveryAddress" class="confirmation-section address-section">
+    <h3 class="section-title">Shipping Address</h3>
+    <div class="address-details">
+      <p><strong>Name:</strong> {{ checkoutData.deliveryAddress.name }}</p>
+      <p><strong>Address:</strong> {{ checkoutData.deliveryAddress.address }}</p>
+      <p><strong>City:</strong> {{ checkoutData.deliveryAddress.city }}</p>
+      <p><strong>Postal Code:</strong> {{ checkoutData.deliveryAddress.postalCode }}</p>
+      <p><strong>Country:</strong> {{ checkoutData.deliveryAddress.country }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="checkoutData.paymentMethod" class="confirmation-section payment-section">
+    <h3 class="section-title">Payment Method</h3>
+    <div class="payment-details">
+      <p><strong>Name:</strong> {{ checkoutData.paymentMethod.name }}</p>
+      <p><strong>Card Number:</strong> {{ checkoutData.paymentMethod.cardNumber }}</p>
+      <p><strong>Expiry Date:</strong> {{ checkoutData.paymentMethod.expiryDate }}</p>
+      <p><strong>CVV:</strong> {{ checkoutData.paymentMethod.cvv }}</p>
+    </div>
+  </div>
+
+  <!-- <div class="confirmation-section cart-summary-section">
+    <h3 class="section-title">Cart Items</h3>
+    <ul class="cart-items-list">
+      <li *ngFor="let item of cart.items" class="cart-item">
+        <p><strong>Product:</strong> {{ item.product.name }}</p>
+        <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+        <p><strong>Price:</strong> {{ item.product.price | currency }}</p>
+      </li>
+    </ul>
+    <p class="total-price"><strong>Total Price:</strong> {{ cart.totalPrice | currency }}</p>
+  </div> -->
+
+  <button class="confirm-button" (click)="confirmOrder()">Confirm Order</button>
+</div>

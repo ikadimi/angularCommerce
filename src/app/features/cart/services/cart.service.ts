@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Product, ProductWithQuantity } from '../../products/models/products.model';
 import { ProductsService } from '../../products/services/products.service';
-import { Cart } from '../models/cart.model';
+import { Cart, CartWithProductDetails } from '../models/cart.model';
 import { ApiWithNotificationService } from '../../../shared/services/api-with-notification.service';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class CartService {
   private cartUrl = environment.cartEndpoint;
 
   // Subject to hold the cart state
-  private cartSubject = new BehaviorSubject<ProductWithQuantity[]>([]);
+  private cartSubject = new BehaviorSubject<CartWithProductDetails | null>(null);
   
   // Observable to expose the cart state
   public cart$ = this.cartSubject.asObservable();
@@ -31,7 +31,7 @@ export class CartService {
   }
 
   // Fetch the cart and product details, then update the subject
-  getCartWithProductDetails(): Observable<ProductWithQuantity[]> {
+  getCartWithProductDetails(): Observable<CartWithProductDetails> {
     return this.http.get<Cart>(`${this.cartUrl}`).pipe(
       switchMap(cart => {
         const productIds = cart.items.map(item => item.productId);
@@ -41,7 +41,7 @@ export class CartService {
               const product = products.find(p => p._id === item.productId) as Product;
               return { ...product, quantity: item.quantity };
             });
-            return productWithDetails;
+            return { items: productWithDetails, totalPrice: cart.totalPrice};
           }),
           // Update the cartSubject whenever we get new cart data
           tap(cartWithDetails => this.cartSubject.next(cartWithDetails))
@@ -72,6 +72,6 @@ export class CartService {
   }
 
   clearCart() {
-    this.cartSubject.next([]); // Clear the cart
+    this.cartSubject.next(null); // Clear the cart
   }
 }

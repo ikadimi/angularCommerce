@@ -11,11 +11,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './cart-total.component.scss'
 })
 export class CartTotalComponent {
-  @Input() cartItems: ProductWithQuantity[] | undefined;
+  @Input() totalPrice: number = 0;
 
   constructor() {}
 
   get total() {
-    return this.cartItems?.reduce((total, item) => total + item.price * item.quantity, 0) || 0;
+    return this.totalPrice.toFixed(2);
   }
 }

@@ -1,6 +1,6 @@
 <h1>Cart</h1>
-<ng-container *ngIf="cartItems">
-    <cart-list [cartItems]="cartItems"></cart-list>
-    <cart-total [cartItems]="cartItems"></cart-total>
+<ng-container *ngIf="cart">
+    <cart-list [cartItems]="cart.items"></cart-list>
+    <cart-total [totalPrice]="cart.totalPrice"></cart-total>
     <a routerLink="/checkout" class="checkout-link">Checkout</a>
 </ng-container>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { CheckoutService } from '../services/checkout.service';
+import { CheckoutData } from '../models/checkout.model';
 
 @Component({
   selector: 'app-confirmation',
@@ -7,17 +8,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./confirmation.component.scss']
 })
 export class ConfirmationComponent {
-  order = {
-    id: '12345',
-    shippingAddress: '123 Main St, Anytown USA',
-    totalAmount: '$100.00'
-  };
+  checkoutData: any; 
 
-  constructor(private router: Router) {}
+  constructor(private checkoutService: CheckoutService) {}
 
-  onFinish() {
-    // Finalize order and navigate to another page if needed
-    // e.g., redirect to homepage or show order summary
-    this.router.navigate(['/']);
+  ngOnInit() {
+    this.checkoutService.checkoutData$.subscribe((data: CheckoutData | null) => {
+      console.log('updated checkout data', data);
+      this.checkoutData = data;
+    })
+  }
+
+  confirmOrder() {
+    this.checkoutService.confirmOrder();
   }
 }

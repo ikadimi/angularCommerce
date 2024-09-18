@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'progress-header',
@@ -7,23 +9,49 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./progress-header.component.scss']
 })
 export class ProgressHeaderComponent implements OnInit {
-  // make the step an input for the checkout where i take it from the url
   currentStep: number = 1;
 
-  constructor() {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // Load current step from localStorage if exists
+    // Subscribe to router events to get the current route
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.updateCurrentStep();
+    });
 
-    const savedStep = localStorage.getItem('checkoutStep');
-    if (savedStep) {
-      this.currentStep = parseInt(savedStep, 10);
+    // Initialize the step on component load
+    this.updateCurrentStep();
+  }
+
+  private updateCurrentStep(): void {
+    // Use ActivatedRoute to get the current route's URL
+    const childRoute = this.route.firstChild?.snapshot.url[0]?.path;
+    this.currentStep = this.getStepFromUrlSegment(childRoute);
+    console.log('step ==> ', childRoute, this.currentStep);
+  }
+
+  private getStepFromUrlSegment(urlSegment: string | undefined): number {
+    switch (urlSegment) {
+      case 'address': return 1;
+      case 'payment': return 2;
+      case 'confirmation': return 3;
+      default: return 1;
     }
   }
 
   goToStep(step: number): void {
-    this.currentStep = step;
-    // Save the current step to localStorage
-    localStorage.setItem('checkoutStep', step.toString());
+    const stepPath = this.getPathFromStep(step);
+    this.router.navigate([`/checkout/${stepPath}`]);
+  }
+
+  private getPathFromStep(step: number): string {
+    switch (step) {
+      case 1: return 'address';
+      case 2: return 'payment';
+      case 3: return 'confirmation';
+      default: return 'address';
+    }
   }
 }

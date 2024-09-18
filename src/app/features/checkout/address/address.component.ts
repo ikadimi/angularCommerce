@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CheckoutService } from '../services/checkout.service';
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './address.component.html',
   styleUrls: ['./address.component.scss']
 })
-export class AddressComponent {
+export class AddressComponent implements OnInit {
   addressForm: FormGroup;
 
   constructor(private fb: FormBuilder, private router: Router, private checkoutService: CheckoutService) {
@@ -22,6 +22,13 @@ export class AddressComponent {
       postalCode: ['', Validators.required],
       country: ['', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    const address = this.checkoutService.getAddress();
+    if (address) {
+      this.addressForm.patchValue(address);
+    }
   }
 
   onNext() {
