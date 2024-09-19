@@ -1,29 +1,36 @@
 .progress-header {
-    display: flex;
-    justify-content: space-around;
-    background-color: #2c2c2c; // Dark background for header
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 30px;
-    
-    .step {
-      color: #aaa; // Inactive step color
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      padding: 10px;
-      text-align: center;
-      border-bottom: 2px solid transparent;
-      transition: color 0.3s, border-color 0.3s;
-  
-      &.active {
-        color: #e94560; // Active step color
-        border-bottom: 2px solid #e94560; // Highlight active step
-      }
-  
-      &:hover {
-        color: lighten(#e94560, 10%); // Lighter on hover
-      }
-    }
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.step {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  flex: 1;
+  margin: 0 5px;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.step.active {
+  background-color: #e94560;
+  color: #fff;
+}
+
+.step.disabled {
+  background-color: #666;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.step:not(.disabled):hover {
+  background-color: #444;
+  cursor: pointer;
+}

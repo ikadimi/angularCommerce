@@ -51,7 +51,7 @@ header {
     // Mobile responsiveness
     @media (max-width: 768px) {
       .nav-links {
-        flex-direction: column;
+        // flex-direction: column;
         gap: 15px; // Increased gap for a more spacious mobile layout
   
         li {

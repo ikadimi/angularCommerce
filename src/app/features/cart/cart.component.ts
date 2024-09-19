@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from './services/cart.service';
-import { Observable } from 'rxjs';
-import { ProductWithQuantity } from '../products/models/products.model';
 import { CartListComponent } from './components/cart-list/cart-list.component';
 import { CommonModule } from '@angular/common';
 import { CartTotalComponent } from './components/cart-total/cart-total.component';
 import { RouterModule } from '@angular/router';
-import { CartWithProductDetails } from './models/cart.model';
+import { CartWithStocks } from './models/cart.model';
 // import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -17,11 +15,10 @@ import { CartWithProductDetails } from './models/cart.model';
   styleUrl: './cart.component.scss'
 })
 export class CartComponent{
-  cart: CartWithProductDetails | null = null;
+  cart: CartWithStocks | null = null;
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.cartService.initCart().subscribe();
     this.cartService.cart$.subscribe(cart => {
       this.cart = cart;
     });

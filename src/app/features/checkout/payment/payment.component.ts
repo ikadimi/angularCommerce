@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CheckoutService } from '../services/checkout.service';
@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss']
 })
-export class PaymentComponent {
+export class PaymentComponent implements OnInit {
   paymentForm: FormGroup;
 
   constructor(private fb: FormBuilder, private router: Router, private checkoutService: CheckoutService) {
@@ -25,6 +25,13 @@ export class PaymentComponent {
       expiryDate: ['', Validators.required],
       cvv: ['', Validators.required]
     });
+  }
+
+  ngOnInit(): void {  
+    const payment = this.checkoutService.getPayment();
+    if (payment) {
+      this.paymentForm.patchValue(payment);
+    }
   }
 
   onNext() {

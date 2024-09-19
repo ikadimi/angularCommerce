@@ -36,3 +36,18 @@
 
   <button class="confirm-button" (click)="confirmOrder()">Confirm Order</button>
 </div>
+
+<app-modal *ngIf="orderConfirmationState !== 'NOT_CONFIRMED'" [closeButton]="false">
+  <div class="modal-header" modal-header>
+    <h2 class="modal-title">Order Confirmation</h2>
+  </div>
+  <div class="modal-content" modal-body>
+    <div *ngIf="orderConfirmationState === 'CONFIRMING'; else confirmedOrError" class="loading-spinner"></div>
+    <ng-template #confirmedOrError>
+      <p class="order-confirmation-message">{{ orderConfirmationMessage }}</p>
+    </ng-template>
+  </div>
+  <div class="modal-footer" modal-footer>
+    <button *ngIf="orderConfirmationState !== 'CONFIRMING'" class="confirm-btn" (click)="onConfirm()">GO TO HOME PAGE</button>
+  </div>
+</app-modal>

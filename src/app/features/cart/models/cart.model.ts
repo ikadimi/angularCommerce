@@ -1,7 +1,6 @@
-import { ProductWithQuantity } from "../../products/models/products.model";
-
 export interface CartItem {
     productId: string;
+    name: string;
     price: number;
     quantity: number;
 }
@@ -14,7 +13,8 @@ export interface Cart {
     createdAt: Date;
 }
 
-export interface CartWithProductDetails  {
-    items: ProductWithQuantity[];
-    totalPrice: number;
+export type CartItemWithStock = CartItem & {stock: number};
+
+export interface CartWithStocks extends Cart {
+    items: CartItemWithStock[];
 }

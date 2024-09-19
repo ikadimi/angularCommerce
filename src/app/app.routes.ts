@@ -11,6 +11,7 @@ import { AddressComponent } from './features/checkout/address/address.component'
 import { PaymentComponent } from './features/checkout/payment/payment.component';
 import { ConfirmationComponent } from './features/checkout/confirmation/confirmation.component';
 import { CheckoutComponent } from './features/checkout/checkout.component';
+import { OrdersComponent } from './features/orders/orders.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -19,6 +20,7 @@ export const routes: Routes = [
     {path: 'register', component: RegisterComponent, canActivate: [ReverseAuthGuard]},
     {path: 'login', component: LoginComponent, canActivate: [ReverseAuthGuard]},
     {path: 'cart', canActivate: [AuthGuard], component: CartComponent},
+    {path: 'orders', canActivate: [AuthGuard], component: OrdersComponent},
     {
         path: 'checkout',
         component: CheckoutComponent,

@@ -1,21 +1,23 @@
 <div class="progress-header">
-    <div 
-      class="step" 
-      [class.active]="currentStep === 1" 
-      (click)="goToStep(1)">
-      <span>1. Delivery Address</span>
-    </div>
-    <div 
-      class="step" 
-      [class.active]="currentStep === 2" 
-      (click)="goToStep(2)">
-      <span>2. Payment</span>
-    </div>
-    <div 
-      class="step" 
-      [class.active]="currentStep === 3" 
-      (click)="goToStep(3)">
-      <span>3. Confirmation</span>
-    </div>
+  <button
+    class="step"
+    [class.active]="currentStep === 1"
+    [class.disabled]="!canNavigateToStep(1)"
+    (click)="goToStep(1)">
+    <span>1. Delivery Address</span>
+  </button>
+  <button
+    class="step"
+    [class.active]="currentStep === 2"
+    [class.disabled]="!canNavigateToStep(2)"
+    (click)="goToStep(2)">
+    <span>2. Payment</span>
+  </button>
+  <button
+    class="step"
+    [class.active]="currentStep === 3"
+    [class.disabled]="!canNavigateToStep(3)"
+    (click)="goToStep(3)">
+    <span>3. Confirmation</span>
+  </button>
 </div>
-  

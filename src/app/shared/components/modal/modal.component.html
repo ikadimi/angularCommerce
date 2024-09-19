@@ -1,0 +1,13 @@
+<div class="modal-overlay" (click)="closeModal()"></div>
+<div class="modal-content">
+    <div class="modal-header">
+        <ng-content select="[modal-header]"></ng-content>
+        <button *ngIf="closeButton" class="close-btn" (click)="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+        <ng-content select="[modal-body]"></ng-content>
+    </div>
+    <div class="modal-footer">
+        <ng-content select="[modal-footer]"></ng-content>
+    </div>
+</div>

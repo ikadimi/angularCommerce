@@ -5,6 +5,13 @@ import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import { CheckoutData } from '../models/checkout.model';
 
+enum OrderConfirmationState {
+  NOT_CONFIRMED = 'NOT_CONFIRMED',
+  CONFIRMING = 'CONFIRMING',
+  CONFIRMED = 'CONFIRMED',
+  ERROR = 'ERROR'
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +19,7 @@ export class CheckoutService {
   private checkoutUrl = environment.checkoutEndpoint;
   private checkoutDataSubject = new BehaviorSubject<CheckoutData | null>(null)
   public checkoutData$ = this.checkoutDataSubject.asObservable();
+  public orderConfirmationState: OrderConfirmationState = OrderConfirmationState.NOT_CONFIRMED;
 
   private storageKey = 'checkoutData';
 
@@ -22,15 +30,30 @@ export class CheckoutService {
 
   confirmOrder() {
     console.log('order confirmed')
+    this.orderConfirmationState = OrderConfirmationState.CONFIRMING;
     // Send checkout data to server
-    // this.http.post(this.checkoutUrl, this.checkoutData).subscribe({
-    //   next: (res) => {
-    //     console.log(res);
-    //   },
-    //   error: (err) => {
-    //     console.error(err);
-    //   }
-    // });
+    this.http.post(this.checkoutUrl, this.checkoutDataSubject.getValue()).subscribe({
+      next: (res) => {
+        this.orderConfirmationState = OrderConfirmationState.CONFIRMED;
+        this.clearCheckout();
+        console.log(res);
+      },
+      error: (err) => {
+        this.orderConfirmationState = OrderConfirmationState.ERROR;
+        this.clearCheckout();
+        console.error(err);
+      }
+    });
+  }
+
+  clearCheckout() {
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.removeItem(this.storageKey)
+    }
+  }
+
+  resetOrderConfirmationState() {
+    this.orderConfirmationState = OrderConfirmationState.NOT_CONFIRMED;
   }
 
   // Save delivery address and payment method to sessionStorage

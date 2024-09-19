@@ -5,6 +5,7 @@
         <li><a routerLink="/products" class="nav-link">Products</a></li>
         <ng-container *ngIf="isAuthenticated; else notAuthenticated">
           <li><a routerLink="/cart" class="nav-link">Cart</a></li>
+          <li><a routerLink="/orders" class="nav-link">orders</a></li>
           <li><a (click)="logout()" class="nav-link logout">Logout</a></li>
         </ng-container>
         <ng-template #notAuthenticated>

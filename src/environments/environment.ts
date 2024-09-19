@@ -4,6 +4,7 @@ export const environment = {
     authEndpoint: 'http://localhost:3300/auth',
     cartEndpoint: 'http://localhost:3300/cart',
     checkoutEndpoint: 'http://localhost:3300/checkout',
+    ordersEndpoint: 'http://localhost:3300/orders',
     // image host api
     imageEndpoint: 'http://localhost:3100'
   };

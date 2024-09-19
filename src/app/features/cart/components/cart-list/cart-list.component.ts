@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { ProductWithQuantity } from '../../../products/models/products.model';
 import { CartItemComponent } from '../cart-item/cart-item.component';
 import { CommonModule } from '@angular/common';
+import { CartItemWithStock } from '../../models/cart.model';
 
 @Component({
   selector: 'cart-list',
@@ -11,5 +11,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './cart-list.component.scss'
 })
 export class CartListComponent {
-  @Input() cartItems: ProductWithQuantity[] | undefined;
+  @Input() cartItems: CartItemWithStock[] | undefined;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { CheckoutService } from '../services/checkout.service';
 
 @Component({
   selector: 'progress-header',
@@ -11,7 +12,7 @@ import { filter } from 'rxjs';
 export class ProgressHeaderComponent implements OnInit {
   currentStep: number = 1;
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute, private checkoutService: CheckoutService) {}
 
   ngOnInit(): void {
     // Subscribe to router events to get the current route
@@ -23,6 +24,21 @@ export class ProgressHeaderComponent implements OnInit {
 
     // Initialize the step on component load
     this.updateCurrentStep();
+  }
+
+  canNavigateToStep(step: number): boolean {
+    if (step === 2) {
+      if (!this.checkoutService.getAddress()) {
+        return false
+      }
+    }
+    if (step === 3) {
+      if (!this.checkoutService.getAddress() || !this.checkoutService.getPayment()) {
+        return false
+      }
+    }
+
+    return true
   }
 
   private updateCurrentStep(): void {
@@ -42,6 +58,9 @@ export class ProgressHeaderComponent implements OnInit {
   }
 
   goToStep(step: number): void {
+    if (!this.canNavigateToStep(step)) {
+      return;
+    }
     const stepPath = this.getPathFromStep(step);
     this.router.navigate([`/checkout/${stepPath}`]);
   }

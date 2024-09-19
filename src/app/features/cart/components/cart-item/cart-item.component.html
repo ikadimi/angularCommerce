@@ -5,17 +5,17 @@
     </div>
     
     <div class="cart-item-quantity" *ngIf="availableQuantities.length > 1">
-      <label for="quantity-select-{{cartItem._id}}" class="visually-hidden">Quantity:</label>
+      <label for="quantity-select-{{cartItem.productId}}" class="visually-hidden">Quantity:</label>
       <select
-        id="quantity-select-{{cartItem._id}}"
+        id="quantity-select-{{cartItem.productId}}"
         [ngModel]="quantity"
-        (ngModelChange)="onQuantityChange(cartItem._id, $event)"
+        (ngModelChange)="onQuantityChange(cartItem.productId, $event)"
         class="quantity-select"
       >
         <option *ngFor="let qty of availableQuantities" [value]="qty">{{ qty }}</option>
       </select>
     </div>
     
-    <button (click)="removeFromCart(cartItem._id)" class="btn-remove">Remove</button>
+    <button (click)="removeFromCart(cartItem.productId)" class="btn-remove">Remove</button>
   </li>
   
