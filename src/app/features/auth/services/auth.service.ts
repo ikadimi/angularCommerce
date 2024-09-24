@@ -25,11 +25,15 @@ export class AuthService {
 
     private loadUserFromCookie() {
         this.http.get(`${this.authUrl}/me`).subscribe({
-            next: (user) => this.userSubject.next(user),
+            next: (user) => {
+                this.userSubject.next(user)
+                this.setTokenToLocalStorage();
+            },
             error: (error) => {
                 if (error.status === 401) {
                     this.userSubject.next(null);
                 }
+                this.removeTokenFromLocalStorage();
                 console.log('self auth error', error.status)}
             });
     }

@@ -1,42 +1,69 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'product-search',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './product-search.component.html',
-  styleUrl: './product-search.component.scss'
+  styleUrls: ['./product-search.component.scss']
 })
 export class ProductSearchComponent {
   @Output() filtersChange = new EventEmitter<any>();
-  searchTerm: string;
-  category: string;
-  minPrice: number;
-  maxPrice: number;
+  @Input() brands: string[] = [];
+  @Input() categories: string[] = [];
+  @Input() minPrice?: number = undefined;
+  @Input() maxPrice?: number = undefined;
+
+  searchTerm: string = '';
+  category: string = '';
+  brand: string = '';
+  
+  // Bind the selected values
+  selectedMinPrice?: number = this.minPrice;
+  selectedMaxPrice?: number = this.maxPrice;
+
+  private filterChangeSubject = new Subject<any>();
 
   constructor(private route: ActivatedRoute) {
+    this.filterChangeSubject.pipe(debounceTime(300)).subscribe(() => {
+      this.updateFilters();
+    });
+    // Initialize filters from the URL params if present
     this.searchTerm = this.route.snapshot.queryParams['searchTerm'] || '';
     this.category = this.route.snapshot.queryParams['category'] || '';
-    this.minPrice = this.route.snapshot.queryParams['minPrice'] || 0;
-    this.maxPrice = this.route.snapshot.queryParams['maxPrice'] || 1000;
+    this.brand = this.route.snapshot.queryParams['brand'] || '';
+    this.selectedMinPrice = +this.route.snapshot.queryParams['minPrice'] || this.minPrice;
+    this.selectedMaxPrice = +this.route.snapshot.queryParams['maxPrice'] || this.maxPrice;
   }
 
   clearFilters(): void {
     this.searchTerm = '';
     this.category = '';
-    this.minPrice = 0;
-    this.maxPrice = 1000;
+    this.brand = '';
+    this.selectedMinPrice = undefined;
+    this.selectedMaxPrice = undefined;
     this.onFilterChange();
   }
+
   onFilterChange(): void {
-    this.filtersChange.emit({
+    this.filterChangeSubject.next(this.getCurrentFilters());
+  }
+
+  private getCurrentFilters() {
+    return {
       searchTerm: this.searchTerm,
       category: this.category,
-      minPrice: this.minPrice,
-      maxPrice: this.maxPrice
-    });
+      brand: this.brand,
+      minPrice: this.selectedMinPrice,
+      maxPrice: this.selectedMaxPrice,
+    };
+  }
+
+  private updateFilters(): void {
+    this.filtersChange.emit(this.getCurrentFilters());
   }
 }

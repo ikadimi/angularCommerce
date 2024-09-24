@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -10,7 +10,7 @@ import { ProductsService } from '../../products/services/products.service';
 @Injectable({
   providedIn: 'root',
 })
-export class CartService {
+export class CartService implements OnInit {
   private cartUrl = environment.cartEndpoint;
 
   private cartSubject = new BehaviorSubject<CartWithStocks | null>(null);
@@ -19,6 +19,9 @@ export class CartService {
   constructor(private http: HttpClient,
     private ApiWithNotificationSercice: ApiWithNotificationService,
     private productService: ProductsService) {
+  }
+
+  ngOnInit(): void {
     this.getCart().subscribe();
   }
 
@@ -26,7 +29,7 @@ export class CartService {
   getCart(): Observable<CartWithStocks | null> {
     return this.http.get<Cart>(this.cartUrl).pipe(
         switchMap(cart => {
-          if (cart.items.length === 0) {
+          if (!cart || !cart.items || cart.items.length === 0) {
             // Return null if the cart is empty
             return of(null);
           }
