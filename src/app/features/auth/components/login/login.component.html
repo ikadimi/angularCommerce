@@ -9,6 +9,9 @@
       <input type="password" name="password" id="password" [(ngModel)]="userLogin.password" class="form-input" required>
     </div>
   
-    <button type="submit" class="btn-submit">Login</button>
+    <button type="submit" [disabled]="isSubmitting || isLoading" class="btn-submit">Login</button>
 </form>
-  
+
+<div *ngIf="isLoading" class="loading-message">
+  <p>Verifying your email, please wait...</p>
+</div>

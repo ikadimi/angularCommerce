@@ -12,10 +12,6 @@ import { RegisterationForm } from '../models/auth.model';
 })
 export class RegisterComponent {
   userRegistration: RegisterationForm = { username: '', email: '', password: '' };
-  // emailError: string | null = null;
-  // passwordError: string | null = null;
-  submissionSuccess: string | null = null;
-  submissionError: string | null = null;
   isSubmitting = false;
 
   constructor(private authService: AuthService) {}
@@ -23,15 +19,11 @@ export class RegisterComponent {
   register() {
     this.isSubmitting = true;
     this.authService.register(this.userRegistration).subscribe({
-      next: (response) => {
+      next: () => {
         this.isSubmitting = false;
-        this.submissionSuccess = 'Registration successful! Please go to the Login page.';
-        this.submissionError = null;
       },
-      error: (error) => {
+      error: () => {
         this.isSubmitting = false;
-        this.submissionError = error.error.message;
-        this.submissionSuccess = null;
       }
     });
   }

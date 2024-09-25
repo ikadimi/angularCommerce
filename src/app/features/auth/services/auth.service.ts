@@ -50,6 +50,10 @@ export class AuthService {
         }
     }
 
+    verifyEmail(token: string) {
+        return this.apiWithNotification.callApi(`${this.authUrl}/verify-email`, 'POST', { token })
+    }
+
     login(userLogin: LoginForm) {
         return this.apiWithNotification.callApi(`${this.authUrl}/login`, 'POST', userLogin).pipe(
             tap(() => {

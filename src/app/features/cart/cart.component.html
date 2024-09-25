@@ -1,6 +1,10 @@
 <h1>Cart</h1>
-<ng-container *ngIf="cart">
+<ng-container *ngIf="cart; else empty">
     <cart-list [cartItems]="cart.items"></cart-list>
     <cart-total [totalPrice]="cart.totalPrice"></cart-total>
     <a routerLink="/checkout" class="checkout-link">Checkout</a>
 </ng-container>
+
+<ng-template #empty>
+    <p>Your cart is empty.</p>
+</ng-template>

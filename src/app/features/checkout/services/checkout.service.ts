@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import { CheckoutData } from '../models/checkout.model';
+import { CartService } from '../../cart/services/cart.service';
 
 enum OrderConfirmationState {
   NOT_CONFIRMED = 'NOT_CONFIRMED',
@@ -25,7 +26,8 @@ export class CheckoutService {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private http: HttpClient
+    private http: HttpClient,
+    private cartService: CartService
   ) { }
 
   confirmOrder() {
@@ -50,6 +52,8 @@ export class CheckoutService {
     if (isPlatformBrowser(this.platformId)) {
       sessionStorage.removeItem(this.storageKey)
     }
+    this.cartService.clearCart();
+    this.checkoutDataSubject.next(null);
   }
 
   resetOrderConfirmationState() {
